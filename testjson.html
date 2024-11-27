@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lire un fichier JSON</title>
+</head>
+<body>
+  <input type="file" id="fileInput" />
+  <pre id="output"></pre>
+
+  <script>
+    // Sélectionner l'élément input
+    const fileInput = document.getElementById('fileInput');
+    const output = document.getElementById('output');
+
+    // Écouter le changement de fichier
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0]; // Obtenir le premier fichier sélectionné
+      if (file && file.type === "application/json") {
+        const reader = new FileReader();
+
+        // Lorsque le fichier est chargé
+        reader.onload = function(e) {
+          try {
+            const jsonData = JSON.parse(e.target.result); // Analyser le JSON
+            output.textContent = JSON.stringify(jsonData, null, 2); // Afficher le contenu
+          } catch (error) {
+            output.textContent = 'Erreur lors de la lecture du fichier JSON';
+          }
+        };
+
+        reader.readAsText(file); // Lire le fichier en tant que texte
+      } else {
+        output.textContent = 'Veuillez sélectionner un fichier JSON valide.';
+      }
+    });
+  </script>
+</body>
+</html>
