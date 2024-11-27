@@ -11,7 +11,7 @@
 
     <script>
         // Chemin vers le fichier txt
-        const filePath = 'https://github.com/ZelKr0w/Programmation-Web/blob/48c04f4250a1c3304354cde74b4f32a054e926d4/texte.txt';
+        const filePath = 'https://raw.githubusercontent.com/ZelKr0w/Programmation-Web/refs/heads/master/texte.txt?token=GHSAT0AAAAAAC23LEN37GQ25NJO5LOQBWYKZ2GZTVQ';
 
         // Fonction pour lire le fichier
         fetch(filePath)
@@ -19,9 +19,12 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                
                 return response.text(); // Retourne le contenu du fichier en texte
+                
             })
             .then(text => {
+                console.log(typeof(text))
                 document.getElementById('file-content').textContent = text; // Affiche le contenu dans la page
             })
             .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
