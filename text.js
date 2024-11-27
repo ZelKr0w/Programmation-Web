@@ -2,11 +2,11 @@ class Text {
     constructor(name, link, difficulty) {
         this.name = name;
         this.link = link;
-        this. diff = difficulty;
+        this.diff = difficulty;
     }
 
-    getText() {
-        fetch(link)
+    writeText(id) {
+        fetch(this.link)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,10 +17,17 @@ class Text {
             })
             .then(text => {
                 console.log(typeof(text))
-                document.getElementById('file-content').textContent = text; // Affiche le contenu dans la page
+                document.getElementById(id).textContent = text; // Affiche le contenu dans la page
             })
             .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
     }
-
-
 }
+
+
+
+
+// test
+//const textObj = new Text('Beispiel', 'Texte/Texte.html', 'easy');
+//textObj.writeText('output');
+
+
