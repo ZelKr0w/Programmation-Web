@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lire un fichier avec Fetch</title>
+</head>
+<body>
+    <h1>Contenu du fichier :</h1>
+    <pre id="file-content"></pre>
+
+    <script>
+        // Chemin vers le fichier txt
+        const filePath = 'https://raw.githubusercontent.com/ZelKr0w/Programmation-Web/refs/heads/master/texte.txt?token=GHSAT0AAAAAAC23LEN37GQ25NJO5LOQBWYKZ2GZTVQ';
+
+        // Fonction pour lire le fichier
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                return response.text(); // Retourne le contenu du fichier en texte
+                
+            })
+            .then(text => {
+                console.log(typeof(text))
+                document.getElementById('file-content').textContent = text; // Affiche le contenu dans la page
+            })
+            .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
+    </script>
+</body>
+</html>
