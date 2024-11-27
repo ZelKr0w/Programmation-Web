@@ -5,7 +5,7 @@ class Text {
         this.diff = difficulty;
     }
 
-    writeText(id) {
+    writeText(targetId) {
         fetch(this.link)
             .then(response => {
                 if (!response.ok) {
@@ -17,7 +17,7 @@ class Text {
             })
             .then(text => {
                 console.log(typeof(text))
-                document.getElementById(id).textContent = text; // Affiche le contenu dans la page
+                document.getElementById(targetId).textContent = text; // Affiche le contenu dans la page
             })
             .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
     }
@@ -27,7 +27,7 @@ class Text {
 
 
 // test
-//const textObj = new Text('Beispiel', './Annexes/testText.txt', 'easy');
-//textObj.writeText('output');
+const textObj = new Text('exemple', '../Annexes/testText.txt', 'easy');
+textObj.writeText('output');
 
 
