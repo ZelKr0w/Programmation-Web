@@ -27,7 +27,7 @@ class Text {
 
 
 // test
-//const textObj = new Text('Beispiel', 'Texte/Texte.html', 'easy');
+//const textObj = new Text('Beispiel', 'Annexes/testText.txt', 'easy');
 //textObj.writeText('output');
 
 
