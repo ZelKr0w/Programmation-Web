@@ -1,6 +1,6 @@
 class Phrase {
     constructor(id) {
-        this.link = '../Annexes/phrase/phrase' + id + '.txt';
+        this.link = 'https://github.com/ZelKr0w/Programmation-Web/tree/2edc899518aa9691965ab6af17173870411a3502/Annexes/phrase/phrase' + id + '.txt';
         this.textArray = [];
     }
 
