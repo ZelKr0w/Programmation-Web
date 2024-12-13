@@ -1,7 +1,7 @@
 class Text {
-    constructor(name, link, difficulty) {
+    constructor(name, difficulty) {
         this.name = name;
-        this.link = link;
+        this.link = '../Annexes/text/text' + difficulty + '.txt';
         this.diff = difficulty;
     }
 
@@ -21,13 +21,33 @@ class Text {
             })
             .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
     }
+
+    /**
+    textArray() {
+        try {
+            // Textdatei laden
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Fehler beim Laden der Datei: ${response.statusText}`);
+            
+            // Textinhalt als String lesen
+            const text = await response.text();
+            
+            // Wörter in ein Array aufteilen
+            const words = text.split(/\s+/); // Trenne bei Leerzeichen, Tabs und neuen Zeilen
+            return words;
+        } catch (error) {
+            console.error("Fehler:", error);
+            return [];
+        }
+    }
+    */
 }
 
 
 
 
 // test
-const textObj = new Text('exemple', '../Annexes/testText.txt', 'easy');
+const textObj = new Text('exemple', 'hard');
 textObj.writeText('output');
 
 
