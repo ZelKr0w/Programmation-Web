@@ -1,53 +1,29 @@
 class Text {
-    constructor(name, difficulty) {
-        this.name = name;
-        this.link = '../Annexes/text/text' + difficulty + '.txt';
-        this.diff = difficulty;
+    constructor(id) {
+        this.link = '../Annexes/text/text' + id + '.txt';
+        this.textArray = [];
     }
 
-    writeText(targetId) {
-        fetch(this.link)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                return response.text(); // Retourne le contenu du fichier en texte
-                
-            })
-            .then(text => {
-                console.log(typeof(text))
-                document.getElementById(targetId).textContent = text; // Affiche le contenu dans la page
-            })
-            .catch(error => console.error('Erreur lors de la lecture du fichier :', error));
-    }
-
-    /**
-    textArray() {
+    async loadTextArray() {
         try {
-            // Textdatei laden
-            const response = await fetch(url);
+            const response = await fetch(this.link);
             if (!response.ok) throw new Error(`Fehler beim Laden der Datei: ${response.statusText}`);
-            
-            // Textinhalt als String lesen
             const text = await response.text();
-            
-            // Wörter in ein Array aufteilen
-            const words = text.split(/\s+/); // Trenne bei Leerzeichen, Tabs und neuen Zeilen
-            return words;
+            this.textArray = text.split(/\s+/);
         } catch (error) {
             console.error("Fehler:", error);
-            return [];
+            this.textArray = [];
         }
     }
-    */
 }
 
 
 
 
-// test
-const textObj = new Text('exemple', 'hard');
-textObj.writeText('output');
-
+// Test
+const textObj = new Text('1');
+textObj.loadTextArray().then(() => {
+    console.log(textObj.textArray);
+    document.getElementById('output').textContent = textObj.textArray.join(' ');
+});
 
