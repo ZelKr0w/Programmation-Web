@@ -11,13 +11,13 @@ function SelectTxtHeader() {
     /// Selection de header différents à cause des redirections des balises nav => nécéssaire de diffentier chaque header
     let FileName = RecupNameFile() ;
     if (FileName === "Selectmoth" || FileName === "Selectphraseh" || FileName === "Selecttext" ) {
-        txtheader = '<header><h1>Typing Challenge</h1><i id="img" class="fa-regular fa-keyboard"></i><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="./Select_text.html">Texte</a><a href="./Select_mot_h.html">Mot au Hasard</a><a href="./Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+        txtheader = '<header><h1>Typing Challenge<i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="./Select_text.html">Texte</a><a href="./Select_mot_h.html">Mot au Hasard</a><a href="./Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
     } 
     else if (FileName === "mot" || FileName === "phrase" || FileName === "Texte") {
-        txtheader = '<header><h1>Typing Challenge</h1><i id="img" class="fa-regular fa-keyboard"></i><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="../Selection/Select_text.html">Texte</a><a href="../Selection/Select_mot_h.html">Mot au Hasard</a><a href="../Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+        txtheader = '<header><h1>Typing Challenge<i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="../Selection/Select_text.html">Texte</a><a href="../Selection/Select_mot_h.html">Mot au Hasard</a><a href="../Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
     } 
     else {
-        txtheader = '<header><h1>Typing Challenge</h1><i id="img" class="fa-regular fa-keyboard"></i><nav class="nav"><a href="./index.html"><i class="fa-solid fa-house"></i></a><a href="./Selection/Select_text.html">Texte</a><a href="./Selection/Select_mot_h.html">Mot au Hasard</a><a href="./Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+        txtheader = '<header><h1>Typing Challenge<i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="./index.html"><i class="fa-solid fa-house"></i></a><a href="./Selection/Select_text.html">Texte</a><a href="./Selection/Select_mot_h.html">Mot au Hasard</a><a href="./Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
     } ;
     return txtheader ;
 }
