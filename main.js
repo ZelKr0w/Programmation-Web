@@ -1,4 +1,26 @@
-console.log(window.location.pathname)
+function RecupNameFile() {
+    var nom = window.location.pathname;
+    nom = nom.split("/");
+    nom = nom[nom.length - 1];
+    nom = nom.substr(0, nom.lastIndexOf("."));
+    nom = nom.replace(new RegExp("(%20|_|-)", "g"), "");
+    return nom ;
+}
+
+function SelectTxtHeader() {
+    /// Selection de header différents à cause des redirections des balises nav => nécéssaire de diffentier chaque header
+    let FileName = RecupNameFile() ;
+    if (FileName === "Selectmoth" || FileName === "Selectphraseh" || FileName === "Selecttext" ) {
+        txtheader = '<header><h1> <i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="./Select_text.html">Texte</a><a href="./Select_mot_h.html">Mot au Hasard</a><a href="./Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+    } 
+    else if (FileName === "mot" || FileName === "phrase" || FileName === "Texte") {
+        txtheader = '<header><h1><i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="../index.html"><i class="fa-solid fa-house"></i></a><a href="../Selection/Select_text.html">Texte</a><a href="../Selection/Select_mot_h.html">Mot au Hasard</a><a href="../Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+    } 
+    else {
+        txtheader = '<header><h1><i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href="./index.html"><i class="fa-solid fa-house"></i></a><a href="./Selection/Select_text.html">Texte</a><a href="./Selection/Select_mot_h.html">Mot au Hasard</a><a href="./Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
+    } ;
+    return txtheader ;
+}
 
 function CreatePage() {
     CreateHeader() ;
@@ -8,9 +30,8 @@ function CreatePage() {
 function CreateHeader() {
     const main = document.querySelector("main") ;
     const body = document.querySelector("body") ;
-    const txtheader = '<header><h1>Typing Challenge</h1><i class="fa-regular fa-keyboard"></i><nav class="nav"><a href="./index.html"><i class="fa-solid fa-house"></i></a><a href="./Selection/Select_text.html">Texte</a><a href="./Selection/Select_mot_h.html">Mot au Hasard</a><a href="./Selection/Select_phrase_h.html">Phrase au Hasard</a></nav></header>' ;
     const header = document.createElement("header") ;
-    header.innerHTML = txtheader ;
+    header.innerHTML = SelectTxtHeader() ;
     body.insertBefore(header,main) ;
 }
 function CreateFooter() {
@@ -23,4 +44,4 @@ function CreateFooter() {
 }
 
 CreatePage();
-
+console.log() ;
