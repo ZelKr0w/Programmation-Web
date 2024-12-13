@@ -1,11 +1,11 @@
 class Mot{
     constructor(name, link, difficulty) {
         this.name = name;
-        this.link = link;
+        this.link = 'https://github.com/ZelKr0w/Programmation-Web/blob/2edc899518aa9691965ab6af17173870411a3502/texte.txt';
         this.diff = difficulty;
     }
 }
-//fonction qui prend un fichier texte avec un mot par ligne et le met dans un tableau avec fectch
+//fonction qui prend un fichier texte, le convertit en chaine de caractere, et le met dans un tableau 
 function textinTab(link) {
     fetch(link)
     .then(response => response.text())
@@ -17,30 +17,40 @@ function textinTab(link) {
         console.error('Error loading the characters:', error);
     });
 }
-function checkWords(wordsArray, n) {
-        let wordIndex = 0;  // Start with the first word
-        let correctCount = 0;  // Track how many words the user gets right
+
+function wordChecker(tableaucarac, duration) {
     
-        // Loop to check the user's input for `n` words
-        while (correctCount < n && wordIndex < wordsArray.length) {
-            const word = wordsArray[wordIndex].trim();  // Get the current word and trim any extra spaces
-             // Prompt the user to type the word
-             const userInput = prompt(`Type the word: ${word}`);
-             // Check if the user input matches the word
-             if (userInput === word) {
-                alert("Correct!");
-                correctCount++;  // Increment the correct count
-            } else {
-                alert("Incorrect. Try again.");
-            }
-    
-            wordIndex++;  // Move to the next word
+    let currentInput = '';
+    let errors = 0;
+    let timeLeft = duration;
+    let isTestRunning = true;
+
+    // Timer setup
+    const startTime = Date.now();
+    const timer = setInterval(() => {
+        timeLeft--;
+        console.log(`Time remaining: ${timeLeft} seconds`);
+        
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            endTest();
         }
-    
-        // After checking n words, display the result
-        if (correctCount === n) {
-            alert(`You typed ${n} words correctly!`);
-        } else {
-            alert(`Game Over. You got ${correctCount} words correct.`);
+    }, 1000);
+
+    // Keyboard event listener
+    document.addEventListener('keydown', (event) => {
+        if (!isTestRunning) return;
+
+        // Handle different key types
+        if (event.key === 'Backspace') {
+            // Remove last character if backspace
+            currentInput = currentInput.slice(0, -1);
+        } else if (event.key.length === 1) {
+            // Add printable characters
+            currentInput += event.key;
         }
-    }
+
+        // Check input against target
+        errors = calculateErrors(currentInput, tableaucarac)
+    });
+}
