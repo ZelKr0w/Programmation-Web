@@ -6,17 +6,17 @@ class Mot{
     }
 }
 //fonction qui prend un fichier texte avec un mot par ligne et le met dans un tableau avec fectch
-function textDansTab(link){
-    fetch('lien')
-    .then(response => response.text()) // response est l'object retourné par fetch, response.text convertit notre reponse en string
+function textinTab(link) {
+    fetch(link)
+    .then(response => response.text())
     .then(text => {
-        const array = text.split('\n'); // Split by newline to create an array
-        console.log(array);
+        const tableaucarac = Array.from(text);
+        console.log(ableaucarac);
     })
     .catch(error => {
-        console.error('Error loading the array:', error);
-     });
-    }
+        console.error('Error loading the characters:', error);
+    });
+}
 function checkWords(wordsArray, n) {
         let wordIndex = 0;  // Start with the first word
         let correctCount = 0;  // Track how many words the user gets right
