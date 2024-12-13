@@ -19,8 +19,7 @@ class Text {
 
 
 
-
-// Test
+// Tests
 const textObj = new Text('1');
 textObj.loadTextArray().then(() => {
     console.log(textObj.textArray);
