@@ -6,7 +6,7 @@ function textinTab(link) {
     .then(response => response.text())
     .then(text => {
         const tableaucarac = Array.from(text);
-        console.log(tableaucarac);
+        console.log(tableaucarac) ;
     })
     .catch(error => {
         console.error('Error loading the characters:', error);
