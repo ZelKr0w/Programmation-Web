@@ -1,10 +1,26 @@
-head{
-    position:fixed;
-    top:0;
+header{
+    text-align: center;
+    display: inline;
+}
+
+header h1{
+    
 }
 
 
-footer{
-    position:fixed;
-    bottom:0;
+header #img{
+    align-content: center;
+    margin-right: 10%;
+}
+
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    font-size: small;
+}
+
+footer ul li{
+    display: inline;
 }
