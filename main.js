@@ -1,3 +1,5 @@
+console.log(window.location.pathname)
+
 function CreatePage() {
     CreateHeader() ;
     CreateFooter() ;
