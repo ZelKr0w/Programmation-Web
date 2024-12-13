@@ -20,3 +20,5 @@ function CreateFooter() {
     body.appendChild(footer) ;
 }
 
+CreatePage();
+
