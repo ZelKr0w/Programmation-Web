@@ -1,19 +1,54 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/c40c83dce3.js" crossorigin="anonymous"></script>
-    <script defer type="text/javascript" src="./mot.js"></script>
-    <script defer type="text/javascript" src="../main.js"></script>
+    <title>Typing Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #inputArea {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            min-height: 50px;
+            margin-bottom: 20px;
+        }
+        #status {
+            margin-top: 20px;
+        }
+        #startButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <div id="clock">00:00:00</div>
-        <div class="Exo">
-            <input disabled="true" id="Texte"/>
-            <input id ="type"/>
-        </div>
-    </main> 
+
+<h1>Typing Test</h1>
+
+<!-- Input field for the user to type -->
+<div>
+    <label for="inputArea">Type the characters below:</label>
+    <div id="inputArea" contenteditable="true" spellcheck="false"></div>
+</div>
+
+<!-- Status for showing remaining time and error count -->
+<div id="status">
+    <p>Time remaining: <span id="timeLeft">0</span> seconds</p>
+    <p>Errors: <span id="errorCount">0</span></p>
+</div>
+
+<!-- Start button to initiate the typing test -->
+<button id="startButton">Start Test</button>
+
+<!-- External JavaScript file -->
+<script src="mot.js"></script>
+
 </body>
 </html>
