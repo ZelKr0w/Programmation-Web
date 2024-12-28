@@ -20,7 +20,9 @@ class Mot {
         }
     }
 }
-const sourcemot= new Mot("https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt")
+
+//ici il faudrait ajouter une boucle if pour decider du lien(id) en fonction de la difficulté choisi par l'utilisateur 
+const sourcemot= new Mot("https://raw.githubusercontent.com/kkrypt0nn/wordlists/refs/heads/main/wordlists/passwords/darkweb_2017.txt")
 console.log(sourcemot.tailleTab)
 function addClass(el, name) {
     el.className += ' ' + name;
