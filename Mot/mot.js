@@ -22,8 +22,21 @@ class Mot {
 }
 
 //ici il faudrait ajouter une boucle if pour decider du lien(id) en fonction de la difficulté choisi par l'utilisateur 
-const sourcemot= new Mot("https://raw.githubusercontent.com/kkrypt0nn/wordlists/refs/heads/main/wordlists/passwords/darkweb_2017.txt")
+const sourcemot= new Mot("https://raw.githubusercontent.com/kkrypt0nn/wordlists/refs/heads/main/wordlists/passwords/nord_vpn.txt")
 console.log(sourcemot.tailleTab)
+
+function Timer(){
+    var sec = 30;
+    var timer = setInterval(function(){
+        document.getElementById("TimerDisplay").innerHTML='00:'+sec;
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
+
 function addClass(el, name) {
     el.className += ' ' + name;
     // ''le nom de la classe deja existante //rajoute le name
@@ -45,7 +58,7 @@ function separateurMot(mot){
 async function newGame() {
     await sourcemot.loadTextArray();
     let i = 0 
-    for (i; i<10; i++){
+    for (i; i<30; i++){
         document.getElementById("words").innerHTML += separateurMot(selecMot());
 
     }
@@ -60,6 +73,8 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
     const expected= currentLetter?.innerHTML.trim() || ' ';//si on a pas de CurrentLetter, alors forcement on a un espace
     const isLetter= key.length === 1 && key !==' ';
     const isSpace = key === ' ';
+    const isBackspace = key ==='Backspace';
+    const isFirstLetter = currentLetter === currentWord.firstChild;
     console.log(key,expected)
         if(isLetter){
             if(currentLetter){
@@ -94,6 +109,32 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
               }
             addClass(currentWord.nextElementSibling.firstElementChild, "current");
             }
-
+        if (isBackspace) {
+            if (currentLetter && isFirstLetter) {
+                  //le mot d'avant devient currrent, et donc la derniere lettre de ce current word devient current 
+                  removeClass(currentWord, 'current');
+                  addClass(currentWord.previousSibling, 'current');
+                  removeClass(currentLetter, 'current');
+                  addClass(currentWord.previousSibling.lastChild, 'current');
+                  removeClass(currentWord.previousSibling.lastChild, 'incorrect');
+                  removeClass(currentWord.previousSibling.lastChild, 'correct');
+                }
+                if (currentLetter && !isFirstLetter) {
+                  // move back one letter, invalidate letter
+                  removeClass(currentLetter, 'current');
+                  addClass(currentLetter.previousSibling, 'current');
+                  removeClass(currentLetter.previousSibling, 'incorrect');
+                  removeClass(currentLetter.previousSibling, 'correct');
+                }
+                if (!currentLetter) {
+                  addClass(currentWord.lastChild, 'current');
+                  removeClass(currentWord.lastChild, 'incorrect');
+                  removeClass(currentWord.lastChild, 'correct');
+                }
+            }    
+    //bouger lignes et mots
+      if(currentWord.getBoundingClientRect().top>150){
+        console.log("la il faudrait faire defiler")
+      }
 });
 newGame();
