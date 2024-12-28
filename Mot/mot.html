@@ -2,109 +2,109 @@
 <head>
 <title>Typing Game</title>
 <style>
-  body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      background-color: #2c3e50; /* Dark blue */
-      font-family: Arial, sans-serif;
-      color: #ecf0f1; /* Light grey */
-  }
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100vh;
+        background-color: #2c3e50; /* Dark blue */
+        font-family: Arial, sans-serif;
+        color: #ecf0f1; /* Light grey */
+    }
 
-  #Timer {
-      margin-top: 20px;
-      text-align: center;
-  }
+    #Timer {
+        margin-top: 20px;
+        text-align: center;
+    }
 
-  #TimerDisplay {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ecf0f1;
-  }
+    #TimerDisplay {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ecf0f1;
+    }
 
-  #game {
-      margin-top: 30px;
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
+    #game {
+        margin-top: 30px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  #words {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      height: 300px;
-      width: 100%;
-      margin-top: 20px;
-      padding: 15px;
-      font-size: 20px;
-      background-color: #34495e; /* Greyish blue */
-      border-radius: 10px;
-      color: #ecf0f1;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
-  }
+    #words {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: 300px;
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        font-size: 20px;
+        background-color: #34495e; /* Greyish blue */
+        border-radius: 10px;
+        color: #ecf0f1;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
 
-  #cursor {
-      width: 2px;
-      height: 1rem;
-      background-color: #ecf0f1; /* Light grey */
-      position: fixed;
-      animation: blink 0.6s infinite;
-      border-radius: 1px;
-  }
+    #cursor {
+        width: 2px;
+        height: 1rem;
+        background-color: #ecf0f1; /* Light grey */
+        position: fixed;
+        animation: blink 0.6s infinite;
+        border-radius: 1px;
+    }
 
-  .word {
-      font-weight: bold;
-      color: #ecf0f1; /* Light grey */
-  }
+    .word {
+        font-weight: bold;
+        color: #ecf0f1; /* Light grey */
+    }
 
-  .incorrect {
-      color: #e74c3c; /* Red */
-  }
+    .incorrect {
+        color: #e74c3c; /* Red */
+    }
 
-  .correct {
-      color: #2ecc71; /* Green */
-  }
+    .correct {
+        color: #2ecc71; /* Green */
+    }
 
-  input[type="text"] {
-      margin-top: 15px;
-      width: 100%;
-      max-width: 500px;
-      height: 40px;
-      font-size: 18px;
-      padding: 5px 10px;
-      border: 2px solid #34495e; /* Greyish blue */
-      border-radius: 5px;
-      outline: none;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  }
+    input[type="text"] {
+        margin-top: 15px;
+        width: 100%;
+        max-width: 500px;
+        height: 40px;
+        font-size: 18px;
+        padding: 5px 10px;
+        border: 2px solid #34495e; /* Greyish blue */
+        border-radius: 5px;
+        outline: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
 
-  input[type="text"]:focus {
-      border-color: #2ecc71; /* Green focus */
-      transform: scale(1.05); /* Slight scaling effect */
-      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.5); /* Green glow */
-  }
+    input[type="text"]:focus {
+        border-color: #2ecc71; /* Green focus */
+        transform: scale(1.05); /* Slight scaling effect */
+        box-shadow: 0 4px 10px rgba(46, 204, 113, 0.5); /* Green glow */
+    }
 
-  @keyframes blink {
-      0% {
-          opacity: 1;
-      }
-      50% {
-          opacity: 0;
-      }
-      100% {
-          opacity: 1;
-      }
-  }
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 </style>
 
 </head>
