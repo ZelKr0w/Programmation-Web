@@ -1,54 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        #inputArea {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            font-family: monospace;
-            border: 1px solid #ccc;
-            min-height: 50px;
-            margin-bottom: 20px;
-        }
-        #status {
-            margin-top: 20px;
-        }
-        #startButton {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+<title>JS</title>
 </head>
 <body>
+    <div id="game">
+        <div id="words"></div>
+        <div id="cursor"></div>       
+        <input type="text" id="typeBox" name="typeBox" size="60" />
+    </div>
+    <script src="script.js"></script>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          height: 100vh;
+          background-color: #f0f0f0;
+          font-family: Arial, sans-serif;
+        }
+      
+        #words {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 20px;
+          font-size: 20px;
+          color: #333;
+        }
+        #cursor {
+      width: 2px;
+     height: 1.0rem;
+      background: blue;
+      position: fixed;
+       top: 190px;
+      left: 40px;
+      animation: blink 0.3s infinite;
+}
+        .word {
+          font-weight: bold;
+        }
+        
 
-<h1>Typing Test</h1>
-
-<!-- Input field for the user to type -->
-<div>
-    <label for="inputArea">Type the characters below:</label>
-    <div id="inputArea" contenteditable="true" spellcheck="false"></div>
-</div>
-
-<!-- Status for showing remaining time and error count -->
-<div id="status">
-    <p>Time remaining: <span id="timeLeft">0</span> seconds</p>
-    <p>Errors: <span id="errorCount">0</span></p>
-</div>
-
-<!-- Start button to initiate the typing test -->
-<button id="startButton">Start Test</button>
-
-<!-- External JavaScript file -->
-<script src="test1.js"></script>
-
-</body>
+      .incorrect {
+            color: red; 
+}
+      .correct{
+        color: green
+      }
+  @keyframes blink {
+    0%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+    100%{
+      opacity:1;
+    }
+  }
+      </style>
+      
 </html>
