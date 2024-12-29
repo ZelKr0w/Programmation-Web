@@ -44,9 +44,7 @@ function selecMot(){
     return sourcemot.tabMots[indexHasard];
 }
 function separateurMot(mot){
-    return `<div class="word">
-            <span class="letter"> 
-            ${mot.split('').join('</span><span class="letter")>')}</span></div>`;
+    return `<div class="word"><span class="letter"> ${mot.split('').join('</span><span class="letter")>')}</span></div>`;
 }
 async function newGame() {
     await sourcemot.loadTextArray();
@@ -68,20 +66,20 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
     const isSpace = key === ' ';
     const isBackspace = key ==='Backspace';
     const isFirstLetter = currentLetter === currentWord.firstChild;
-    const nextLetter = document.querySelector(".letter.current")
+    
         if(isLetter){
             if(currentLetter){
                  if(key===expected){
                     addClass(currentLetter, "correct") 
                     removeClass(currentLetter,"current")
-                   if(currentLetter.nextElementSibling){// on check si on a bien une lettre apres la lettre actuelle
+                   if(currentLetter.nextSibling){// on check si on a bien une lettre apres la lettre actuelle
                         addClass(currentLetter.nextSibling, "current")
                     }
                  }
                  else{
                     addClass(currentLetter, "incorrect")
                     removeClass(currentLetter,"current")
-                    if(currentLetter.nextElementSibling){
+                    if(currentLetter.nextSibling){
                         addClass(currentLetter.nextSibling, "current")
                     }
                 }
@@ -99,9 +97,9 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
             removeClass(currentWord,"current")
             addClass(currentWord.nextSibling, "current")
             if (currentLetter) {
-                removeClass(currentLetter, 'current');
+                removeClass(currentLetter, "current");
               }
-            addClass(currentWord.nextElementSibling.firstElementChild, "current");
+            addClass(currentWord.nextSibling.firstChild, "current");
             }
         if (isBackspace) {
             console.log(expected.lastSibling)
@@ -130,7 +128,7 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
             }    
     //bouger lignes et mots
      if(currentWord.getBoundingClientRect().top>300){  
-        const words = document.getElementById("words")
+        const words = document.getById("words")
         const margin=  parseInt(words.style.marginTop || "0px") ;
         words.style.marginTop = (margin-40) + "px";
       }
