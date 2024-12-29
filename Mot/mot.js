@@ -75,7 +75,7 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
     const isSpace = key === ' ';
     const isBackspace = key ==='Backspace';
     const isFirstLetter = currentLetter === currentWord.firstChild;
-    console.log(key,expected)
+    
         if(isLetter){
             if(currentLetter){
                  if(key===expected){
@@ -110,6 +110,7 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
             addClass(currentWord.nextElementSibling.firstElementChild, "current");
             }
         if (isBackspace) {
+            console.log(expected.lastSibling)
             if (currentLetter && isFirstLetter) {
                   //le mot d'avant devient currrent, et donc la derniere lettre de ce current word devient current 
                   removeClass(currentWord, 'current');
@@ -131,10 +132,9 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
                   removeClass(currentWord.lastChild, 'incorrect');
                   removeClass(currentWord.lastChild, 'correct');
                 }
+                
             }    
     //bouger lignes et mots
-      if(currentWord.getBoundingClientRect().top>150){
-        console.log("la il faudrait faire defiler")
-      }
+      
 });
 newGame();
