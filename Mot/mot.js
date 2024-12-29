@@ -23,18 +23,11 @@ class Mot {
 
 //ici il faudrait ajouter une boucle if pour decider du lien(id) en fonction de la difficulté choisi par l'utilisateur 
 const sourcemot= new Mot("https://raw.githubusercontent.com/kkrypt0nn/wordlists/refs/heads/main/wordlists/passwords/nord_vpn.txt")
-console.log(sourcemot.tailleTab)
+const gameTime=30*1000;
 
-function Timer(){
-    var sec = 30;
-    var timer = setInterval(function(){
-        document.getElementById("TimerDisplay").innerHTML='00:'+sec;
-        sec--;
-        if (sec < 0) {
-            clearInterval(timer);
-        }
-    }, 1000);
-}
+
+
+
 
 
 function addClass(el, name) {
@@ -58,7 +51,7 @@ function separateurMot(mot){
 async function newGame() {
     await sourcemot.loadTextArray();
     let i = 0 
-    for (i; i<30; i++){
+    for (i; i<100; i++){
         document.getElementById("words").innerHTML += separateurMot(selecMot());
 
     }
@@ -75,7 +68,7 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
     const isSpace = key === ' ';
     const isBackspace = key ==='Backspace';
     const isFirstLetter = currentLetter === currentWord.firstChild;
-    
+    const nextLetter = document.querySelector(".letter.current")
         if(isLetter){
             if(currentLetter){
                  if(key===expected){
@@ -94,6 +87,7 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
                 }
            
             }
+            
         }
         if (isSpace) {
             if (expected !== ' ') {
@@ -135,6 +129,23 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
                 
             }    
     //bouger lignes et mots
-      
+     if(currentWord.getBoundingClientRect().top>300){  
+        const words = document.getElementById("words")
+        const margin=  parseInt(words.style.marginTop || "0px") ;
+        words.style.marginTop = (margin-40) + "px";
+      }
+    //deplacement du curseur, ne gere pas les espaces entre les mots encore
+    console.log((currentLetter || currentWord).getBoundingClientRect());
+    const rect = currentLetter.getBoundingClientRect();
+        curseur.style.top = `${rect.top + rect.height / 2}px`;
+        curseur.style.left = `${rect.left}px`;
+        if(expected===' '){
+            const wordRect = currentLetter.getBoundingClientRect();
+        const spaceWidth = parseFloat(window.getComputedStyle(currentLetter).letterSpacing); // Estimate space width
+        cursor.style.top = `${wordRect.top + wordRect.height / 2}px`; // Align with the word
+        cursor.style.left = `${wordRect.right + spaceWidth}px`;
+        }
+    
+        
 });
 newGame();
