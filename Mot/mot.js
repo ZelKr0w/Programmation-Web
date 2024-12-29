@@ -127,10 +127,10 @@ document.getElementById("typeBox").addEventListener("keyup", ev=>{
                 
             }    
     //bouger lignes et mots
-     if(currentWord.getBoundingClientRect().top>300){  
-        const words = document.getById("words")
-        const margin=  parseInt(words.style.marginTop || "0px") ;
-        words.style.marginTop = (margin-40) + "px";
+    if (currentWord.getBoundingClientRect().top > 250) {
+        const words = document.getElementById('words');
+        const margin = parseInt(words.style.marginTop || '0px');
+        words.style.marginTop = (margin - 40) + 'px';
       }
     //deplacement du curseur, ne gere pas les espaces entre les mots encore
     console.log((currentLetter || currentWord).getBoundingClientRect());
