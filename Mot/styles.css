@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+
+:root {
+    --bgColor: #e0f7fa; /* Light blue sky */
+    --textPrimary: #05668d; /* Deep blue for primary text */
+    --textSecondary: #028090; /* Complementary blue for secondary text */
+    --primaryColor: #f6c23e; /* Bright yellow sunshine */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bgColor);
+    color: var(--textPrimary);
+    font-size: 1.4rem;
+}
+
+main {
+    width: 600px;
+    margin: 50px auto;
+}
+
+h1 {
+    color: var(--primaryColor);
+}
+
+h1 svg {
+    width: 40px;
+    fill: var(--primaryColor);
+}
+
+#header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px 6px 30px;
+}
+
+#buttons {
+    text-align: right;
+}
+
+#info {
+    color: var(--primaryColor);
+}
+
+button {
+    background: rgba(255, 255, 255, 0.3);
+    border: 0;
+    color: var(--textSecondary);
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background: var(--primaryColor);
+    color: #fff;
+}
+
+div#game {
+    line-height: 35px;
+    height: 105px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--primaryColor);
+    border-radius: 10px;
+    padding: 5px;
+    background: #ffffff;
+}
+
+div#game:focus {
+    outline: 0;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#mots {
+    filter: blur(5px);
+    color: var(--textSecondary);
+}
+
+#game:focus #mots {
+    filter: blur(0);
+}
+
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 35px;
+    color: var(--textPrimary);
+}
+
+#game:focus #focus-error {
+    display: none;
+}
+
+div.mot {
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0 5px;
+}
+
+.lettre.correct {
+    color: #028090; /* A lighter or complementary shade of the textPrimary color */
+    font-weight: bold; /* Makes it stand out further */
+}
+
+.lettre.incorrect {
+    color: #f55;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#cursor {
+    display: none;
+    width: 2px;
+    height: 1.6rem;
+    background: var(--primaryColor);
+    position: fixed;
+    top: 198px;
+    left: 18px;
+    animation: blink 0.3s infinite;
+}
+
+#game:focus #cursor {
+    display: block;
+}
+
+#game.over #mots {
+    opacity: 0.5;
+    filter: blur(0px);
+}
+
+#game.over:focus #cursor {
+    display: none;
+}
+
+#game.over #focus-error {
+    display: none;
+}
