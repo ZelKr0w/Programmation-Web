@@ -1,127 +1,36 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<title>Typing Game</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        height: 100vh;
-        background-color: #2c3e50; /* Dark blue */
-        font-family: Arial, sans-serif;
-        color: #ecf0f1; /* Light grey */
-    }
-
-    #Timer {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    #TimerDisplay {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ecf0f1;
-    }
-
-    #game {
-        margin-top: 30px;
-        width: 600px;
-        height: 160px;
-        overflow:hidden;
-        padding:20px;
-        line-height:40px;
-    }
-
-    #words {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin:auto;
-        width: 100%;
-        
-        font-size: 20px;
-        background-color: #34495e; /* Greyish blue */
-        border-radius: 10px;
-        color: #ecf0f1;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        overflow-y: auto;
-    }
-
-    #curseur {
-        width: 2px;
-        height: 1rem;
-        top:200px;
-        left: 180px;
-        background-color: #ecf0f1; /* Light grey */
-        position: fixed;
-        animation: blink 0.6s infinite;
-        border-radius: 1px;
-    }
-
-    .word {
-        font-weight: bold;
-        display: inline-block;
-        color: #ecf0f1; /* Light grey */
-    }
-
-    .incorrect {
-        color: #e74c3c; /* Red */
-    }
-
-    .correct {
-        color: #2ecc71; /* Green */
-    }
-
-    input[type="text"] {
-        margin-top: 15px;
-        width: 100%;
-        max-width: 500px;
-        height: 40px;
-        font-size: 18px;
-        padding: 5px 10px;
-        border: 2px solid #34495e; /* Greyish blue */
-        border-radius: 5px;
-        outline: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-    input[type="text"]:focus {
-        border-color: #2ecc71; /* Green focus */
-        transform: scale(1.05); /* Slight scaling effect */
-        box-shadow: 0 4px 10px rgba(46, 204, 113, 0.5); /* Green glow */
-    }
-
-    @keyframes blink {
-        0% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <title>shitty type - Projet de programmation Web INSA</title>
+    <meta name="description" content=>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="Timer">
-        <h2>Chrono</h2>
-        <p id="TimerDisplay">00:30</p>
-        <button type="button" id="boutonChrono" onclick="Timer()">Start Chrono</button>
-    </div>
-    <div id="game">
-        <div id="words"></div>
-        <div id="curseur"></div>       
-    </div>
-    <input type="text" id="typeBox" name="typeBox" size="60" />
-    <script src="mot.js"></script>
+    <main>
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M584.2 96.36c-28.88-1.701-54.71 17.02-79.74 26.49C490 88.22 455.9 64 416 64c-11.25 0-22 2.252-32 5.877V56C384 42.75 373.2 32 360 32h-16C330.8 32 320 42.75 320 56v49C285.1 79.62 241.2 64 192 64C85.1 64 0 135.6 0 224v232C0 469.3 10.75 480 24 480h48C85.25 480 96 469.3 96 456v-62.87C128.4 407.5 166.8 416 208 416s79.63-8.492 112-22.87V456c0 13.25 10.75 24 24 24h48c13.25 0 24-10.75 24-24V288h128v32c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V288c17.62 0 32-14.38 32-32l-.0001-96.07C639.1 127.8 616.4 98.25 584.2 96.36zM447.1 176c-8.875 0-16-7.125-16-16S439.1 144 448 144s16 7.125 16 16S456.9 176 447.1 176z"/></svg>
+            ShittyType
+        </h1>
+        <div id="header">
+            <div id="info"></div>
+            <div id="buttons">
+                <button id="newGameBtn">New game</button>
+            </div>
+        </div>
+        <div id="game" tabindex="0">
+            <div id="mots"></div>
+            <div id="cursor"></div>
+            <div id="focus-error">Click here to focus</div>
+        </div>
+       
+       
+        <label for="pet-select">choix du temps de jeu:</label>
+         <select id="tempSelect">
+  <option value=30>30sec</option>
+  <option value=60>1min</option>
+    </main>
+    <script src="typing.js"></script>
 </body>
 </html>
