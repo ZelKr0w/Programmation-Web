@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap');
 
 :root {
-    --bgColor: #e0f7fa; /* Light blue sky */
-    --textPrimary: #05668d; /* Deep blue for primary text */
-    --textSecondary: #028090; /* Complementary blue for secondary text */
-    --primaryColor: #f6c23e; /* Bright yellow sunshine */
+    --bgColor: #1b003b; /* Noir avec une touche de violet */
+    --textPrimary: #00ffd0; /* Cyan néon */
+    --textSecondary: #ff00ff; /* Rose électrique */
+    --primaryColor: #ff9900; /* Orange vibrant */
+    --secondaryColor: #8000ff; /* Violet électrique */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     background-color: var(--bgColor);
     color: var(--textPrimary);
     font-size: 1.4rem;
+    text-shadow: 0 0 10px var(--textPrimary);
 }
 
 main {
@@ -21,6 +23,7 @@ main {
 
 h1 {
     color: var(--primaryColor);
+    text-shadow: 0 0 15px var(--primaryColor);
 }
 
 h1 svg {
@@ -43,18 +46,20 @@ h1 svg {
 }
 
 button {
-    background: rgba(255, 255, 255, 0.3);
-    border: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--textPrimary);
     color: var(--textSecondary);
-    padding: 5px 20px;
+    padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background: var(--primaryColor);
-    color: #fff;
+    background: var(--textSecondary);
+    color: var(--bgColor);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--textSecondary);
 }
 
 div#game {
@@ -62,15 +67,16 @@ div#game {
     height: 105px;
     overflow: hidden;
     position: relative;
-    border: 2px solid var(--primaryColor);
+    border: 2px solid var(--secondaryColor);
     border-radius: 10px;
     padding: 5px;
-    background: #ffffff;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px var(--secondaryColor);
 }
 
 div#game:focus {
     outline: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.9);
 }
 
 #mots {
@@ -80,6 +86,7 @@ div#game:focus {
 
 #game:focus #mots {
     filter: blur(0);
+    text-shadow: 0 0 10px var(--textSecondary);
 }
 
 #focus-error {
@@ -88,6 +95,7 @@ div#game:focus {
     text-align: center;
     padding-top: 35px;
     color: var(--textPrimary);
+    text-shadow: 0 0 15px var(--textPrimary);
 }
 
 #game:focus #focus-error {
@@ -101,12 +109,14 @@ div.mot {
 }
 
 .lettre.correct {
-    color: #028090; /* A lighter or complementary shade of the textPrimary color */
-    font-weight: bold; /* Makes it stand out further */
+    color: var(--textPrimary);
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--textPrimary);
 }
 
 .lettre.incorrect {
-    color: #f55;
+    color: #ff004d; /* Rouge intense */
+    text-shadow: 0 0 10px #ff004d;
 }
 
 @keyframes blink {
@@ -121,6 +131,27 @@ div.mot {
     }
 }
 
+
+
+@keyframes shake {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-2px, 2px);
+    }
+    50% {
+        transform: translate(2px, -2px);
+    }
+    75% {
+        transform: translate(-2px, -2px);
+    }
+}
+
+body.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
 #cursor {
     display: none;
     width: 2px;
@@ -130,6 +161,7 @@ div.mot {
     top: 198px;
     left: 18px;
     animation: blink 0.3s infinite;
+    box-shadow: 0 0 10px var(--primaryColor);
 }
 
 #game:focus #cursor {
