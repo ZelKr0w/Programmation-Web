@@ -66,6 +66,14 @@ async function newGame() {
   window.timer = null;
 }
 
+function playKeySound() {
+  const audio = new Audio('keypress.mp3'); // Chemin vers votre fichier audio
+  audio.volume = 0.5; // Ajustez le volume si nécessaire
+  audio.play().catch((error) => {
+      console.error("Erreur lors de la lecture du son :", error);
+  });
+}
+
 function motsParMinute() {
   const mots = [...document.querySelectorAll('.mot')];
   const dernierMotEcrit = document.querySelector('.mot.actuel');
@@ -121,6 +129,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if(onALettre){
+    playKeySound();
     if(lettreActuelle){
          if(key===toucheAttendue){
             ajoutClasse(lettreActuelle, "correct") 
@@ -141,6 +150,10 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEspace) {
+    document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 300); 
     if (toucheAttendue !== ' ') {
       const lettresToInvalidate = [...document.querySelectorAll('.mot.actuel .lettre:not(.correct)')];
       lettresToInvalidate.forEach(lettre => {
@@ -156,6 +169,10 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEfface) {
+    document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 300); 
     if (lettreActuelle && premiereLettre) {
       // make prev mot actuel, last lettre actuel
       supprimeClasse(motActuel, 'actuel');
