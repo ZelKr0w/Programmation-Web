@@ -60,6 +60,10 @@ async function newGame() {
   for (let i = 0; i < 200; i++) {
     document.getElementById('mots').innerHTML += insertMot(motHasard());
   }
+  document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 300); 
   ajoutClasse(document.querySelector('.mot'), 'actuel');
   ajoutClasse(document.querySelector('.lettre'), 'actuel');
   document.getElementById('info').innerHTML = (tempPartie / 1000) + '';
@@ -150,10 +154,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEspace) {
-    document.body.classList.add('shake');
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 300); 
+    playKeySound();
     if (toucheAttendue !== ' ') {
       const lettresToInvalidate = [...document.querySelectorAll('.mot.actuel .lettre:not(.correct)')];
       lettresToInvalidate.forEach(lettre => {
@@ -169,10 +170,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEfface) {
-    document.body.classList.add('shake');
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 300); 
+    playKeySound();
     if (lettreActuelle && premiereLettre) {
       // make prev mot actuel, last lettre actuel
       supprimeClasse(motActuel, 'actuel');
