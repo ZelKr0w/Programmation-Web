@@ -108,6 +108,7 @@ function gameOver() {
   ajoutClasse(document.getElementById('game'), 'over');
   const result = motsParMinute();
   document.getElementById('info').innerHTML = `WPM: ${result}`;
+  window.location.href = 'pagefin.html';
 }
 
 document.getElementById('game').addEventListener('keyup', ev => {
