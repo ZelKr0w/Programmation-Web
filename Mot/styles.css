@@ -43,6 +43,7 @@ h1 svg {
 
 #info {
     color: var(--primaryColor);
+    padding-left: 10px;
 }
 
 button {
