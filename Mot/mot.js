@@ -154,10 +154,6 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEspace) {
-    document.body.classList.add('shake');
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 300); 
     playKeySound();
     if (toucheAttendue !== ' ') {
       const lettresToInvalidate = [...document.querySelectorAll('.mot.actuel .lettre:not(.correct)')];
@@ -174,11 +170,9 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEfface) {
-    document.body.classList.add('shake');
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 300); 
+    
     playKeySound();
+    
     if (lettreActuelle && premiereLettre) {
       // make prev mot actuel, last lettre actuel
       supprimeClasse(motActuel, 'actuel');
