@@ -11,11 +11,11 @@ function SelectTxtHeader() {
     /// Selection de header différents à cause des redirections des balises nav => nécéssaire de diffentier chaque header
     let FileName = RecupNameFile() ;
 
-    let txtheader1 = '<header><h1> <i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href=';
-    let txtheader2 = '><i class="fa-solid fa-house"></i></a><a href=' ;
-    let txtheader3 = '>Texte</a><a href=';
-    let txtheader4 = '>Mot au Hasard</a><a href=';
-    let txtheader5 = '>Phrase au Hasard</a></nav></header>' ;
+    let txtheader1 = '<h1> <i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href=';
+    let txtheader2 = 'class="nav-link"><i class="fa-solid fa-house"></i></a><a href=' ;
+    let txtheader3 = 'class="nav-link">Texte</a><a href=';
+    let txtheader4 = 'class="nav-link">Mot au Hasard</a><a href=';
+    let txtheader5 = 'class="nav-link">Phrase au Hasard</a></nav>' ;
 
     let txtheader = "" ;
     if (FileName === "Selectmoth" || FileName === "Selectphraseh" || FileName === "Selecttext" ) {
@@ -45,7 +45,7 @@ function CreateHeader() {
 function CreateFooter() {
     /** Create footer for all pages */
     const body = document.querySelector("body") ;
-    const txtfooter = "<footer> <p>Fait par</p><ul><li>Axel BOUTIE</li><li>Melwan KOUTAINE</li><li>Lasse KUHNT</li><li>Lorcan JOHNSON</li></ul></footer>" ;
+    const txtfooter = '<footer> <p>Fait par</p><ul class="nav-link"><li>Axel BOUTIE</li><li>Melwan KOUTAINE</li><li>Lasse KUHNT</li><li>Lorcan JOHNSON</li></ul></footer>' ;
     const footer = document.createElement("footer") ;
     footer.innerHTML = txtfooter ;
     body.appendChild(footer) ;
