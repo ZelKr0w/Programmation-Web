@@ -11,7 +11,7 @@ function SelectTxtHeader() {
     /// Selection de header différents à cause des redirections des balises nav => nécéssaire de diffentier chaque header
     let FileName = RecupNameFile() ;
 
-    let txtheader1 = '<h1> <i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i></h1><nav class="nav"><a href=';
+    let txtheader1 = '<h1> <i id="img" class="fa-regular fa-keyboard"></i> Typing Challenge <i id="img" class="fa-regular fa-keyboard"></i> </br> </h1><nav class="nav"><a href=';
     let txtheader2 = 'class="nav-link"><i class="fa-solid fa-house"></i></a><a href=' ;
     let txtheader3 = 'class="nav-link">Texte</a><a href=';
     let txtheader4 = 'class="nav-link">Mot au Hasard</a><a href=';
