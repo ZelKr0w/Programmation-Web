@@ -23,7 +23,7 @@ class Mot {
 
 //ici il faudrait ajouter une boucle if pour decider du lien(id) en fonction de la difficulté choisi par l'utilisateur 
 const sourcemot= new Mot("https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words.txt")
-let tempPartie;
+let tempPartie = 30000; // Default value (30 seconds)
 
 document.addEventListener('DOMContentLoaded', () => {
   const tempSelect = document.getElementById("tempSelect");
@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.timer = null;
 window.gameStart = null;
 window.pauseTime = 0;
-
-
 function ajoutClasse(el,name) {
   el.className += ' '+name;
 }
@@ -68,7 +66,7 @@ async function newGame() {
     }, 300); 
   ajoutClasse(document.querySelector('.mot'), 'actuel');
   ajoutClasse(document.querySelector('.lettre'), 'actuel');
-  document.getElementById('info').innerHTML = `${tempPartie / 1000}`;
+  document.getElementById('info').innerHTML = (tempPartie / 1000) + '';
   window.timer = null;
 }
 
@@ -94,9 +92,6 @@ function motsParMinute() {
   return correctmots.length / tempPartie * 60000;
 }
 
-/**
- * Handles the end of the game by stopping the s, updating the game state, and displaying the words per minute (WPM) result.
- */
 function gameOver() {
   clearInterval(window.timer);
   ajoutClasse(document.getElementById('game'), 'over');
@@ -133,7 +128,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
         gameOver();
         return;
       }
-      document.getElementById('info').innerHTML = `${sRestant}`;
+      document.getElementById('info').innerHTML = sRestant + '';
     }, 1000);
   }
 
@@ -155,10 +150,14 @@ document.getElementById('game').addEventListener('keyup', ev => {
             }
         }
       }
-   
+
   }
 
   if (onAEspace) {
+    document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 300); 
     playKeySound();
     if (toucheAttendue !== ' ') {
       const lettresToInvalidate = [...document.querySelectorAll('.mot.actuel .lettre:not(.correct)')];
@@ -175,7 +174,10 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEfface) {
-    
+    document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 300); 
     playKeySound();
     if (lettreActuelle && premiereLettre) {
       // make prev mot actuel, last lettre actuel
@@ -220,4 +222,4 @@ document.getElementById('newGameBtn').addEventListener('click', () => {
   newGame();
 });
 
-
+newGame();
