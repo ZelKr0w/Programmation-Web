@@ -100,7 +100,7 @@ function motsParMinute() {
     const correctlettres = lettres.filter(lettre => lettre.className.includes('correct'));
     return lettresIncorrectes.length === 0 && correctlettres.length === lettres.length;
   });
-  return correctmots.length / tempPartie * 60000;
+  return correctmots.length / tempSelect.value * 60;
 }
 
 function gameOver() {
