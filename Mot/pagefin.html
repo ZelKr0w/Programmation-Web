@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="mot.js" defer></script>
+</head>
+<body>
+    <h1>Résultat de la Partie</h1>
+    <p id="resultat"></p>
+    <button onclick="location.href='home.html'">Revenir à l'accueil</button>
+    <button onclick="location.href='mot.html'">Rejouer</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resultat = localStorage.getItem('resultat');
+            document.getElementById('resultat').textContent = `Votre score est de ${resultat} mots par minute.`;
+        });
+    </script>
+</body>
+</html>
