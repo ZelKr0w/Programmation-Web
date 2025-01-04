@@ -25,14 +25,21 @@ class Mot {
 const sourcemot= new Mot("https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words.txt")
 let tempPartie = 30000; // Default value (30 seconds)
 
+function updateTempInfo() {
+  document.getElementById('info').innerHTML = `${tempPartie / 1000} sec`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const tempSelect = document.getElementById("tempSelect");
-  tempPartie = parseInt(tempSelect.value, 10) * 1000;
 
-  // Update tempPartie whenever the player changes the selection
+  // Définir la valeur initiale de tempPartie
+  tempPartie = parseInt(tempSelect.value, 10) * 1000;
+  updateTempInfo(); // Met à jour l'affichage initial
+
+  // Ajouter un écouteur d'événement pour gérer les changements
   tempSelect.addEventListener('change', (event) => {
-    tempPartie = parseInt(event.target.value, 10) * 1000;
-    console.log("New tempPartie:", tempPartie); // Debugging log
+      tempPartie = parseInt(event.target.value, 10) * 1000;
+      updateTempInfo(); // Met à jour l'affichage après changement
   });
 });
 window.timer = null;
@@ -55,19 +62,23 @@ function insertMot(mot) {
 }
 
 async function newGame() {
-  await sourcemot.loadTextArray(); 
-  document.getElementById('mots').innerHTML = '';
+  await sourcemot.loadTextArray(); // Charger les mots
+
+  // Réinitialiser le contenu de la zone de jeu
+  const motsContainer = document.getElementById('mots');
+  motsContainer.innerHTML = '';
+
+  // Ajouter les nouveaux mots
   for (let i = 0; i < 200; i++) {
-    document.getElementById('mots').innerHTML += insertMot(motHasard());
+    motsContainer.innerHTML += insertMot(motHasard());
   }
-  document.body.classList.add('shake');
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 300); 
+  updateTempInfo();
+  // Activer le premier mot et la première lettre
   ajoutClasse(document.querySelector('.mot'), 'actuel');
   ajoutClasse(document.querySelector('.lettre'), 'actuel');
-  document.getElementById('info').innerHTML = (tempPartie / 1000) + '';
-  window.timer = null;
+
+  // Réinitialiser le timer d'information
+  document.getElementById('info').innerHTML = (tempPartie / 1000).toString();
 }
 
 function playKeySound() {
@@ -172,7 +183,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   if (onAEfface) {
     
     playKeySound();
-    
+  
     if (lettreActuelle && premiereLettre) {
       // make prev mot actuel, last lettre actuel
       supprimeClasse(motActuel, 'actuel');
@@ -211,9 +222,26 @@ document.getElementById('game').addEventListener('keyup', ev => {
   cursor.style.left = (nextlettre || nextmot).getBoundingClientRect()[nextlettre ? 'left' : 'right'] + 'px';
 });
 
-document.getElementById('newGameBtn').addEventListener('click', () => {
-  gameOver();
-  newGame();
+document.getElementById('newGameBtn').addEventListener('click', async () => {
+  clearInterval(window.timer); // Stop any ongoing timer
+  window.timer = null;
+  window.gameStart = null;
+  window.pauseTime = 0;
+
+  // Réinitialiser les styles des mots
+  const mots = document.querySelectorAll('.mot');
+  mots.forEach((mot) => mot.className = 'mot');
+  const lettres = document.querySelectorAll('.lettre');
+  lettres.forEach((lettre) => lettre.className = 'lettre');
+
+  // Réinitialiser l'interface utilisateur
+  document.getElementById('info').innerHTML = `${tempPartie / 1000}`;
+  document.getElementById('mots').style.marginTop = '0px';
+  document.getElementById('cursor').style.display = 'none';
+  supprimeClasse(document.getElementById('game'), 'over');
+
+  // Charger les nouveaux mots et démarrer un nouveau jeu
+  await newGame();
 });
 
 newGame();
