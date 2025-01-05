@@ -181,3 +181,34 @@ body.shake {
 #game.over #focus-error {
     display: none;
 }
+
+footer {
+    position: fixed;
+    bottom:0 ;
+    background-color: var(--secondaryColor);
+    box-shadow: 0 0 15px var(--secondaryColor);
+    color: var(--textPrimary);
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+footer ul.nav-link {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+footer ul.nav-link li {
+    color: var(--textPrimary);
+    font-size: 1rem;
+    text-shadow: 0 0 10px var(--textPrimary);
+}
