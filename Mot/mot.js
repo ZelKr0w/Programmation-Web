@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+
 window.timer = null;
 window.gameStart = null;
 window.pauseTime = 0;
@@ -213,7 +215,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   // move lines / mots
-  if (motActuel.getBoundingClientRect().top > 250) {
+  if (motActuel.getBoundingClientRect().top > 300) {
     const mots = document.getElementById('mots');
     const margin = parseInt(mots.style.marginTop || '0px');
     mots.style.marginTop = (margin - 35) + 'px';
