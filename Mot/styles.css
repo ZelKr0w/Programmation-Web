@@ -62,6 +62,43 @@ button:hover {
     transform: scale(1.1);
     box-shadow: 0 0 10px var(--textSecondary);
 }
+#tempSelect, #NivSelect {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--textPrimary);
+    color: var(--textSecondary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-family: 'Roboto Mono', monospace;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    width: 150px;
+    margin: 10px;
+}
+
+/* Effet au survol des sélecteurs */
+#tempSelect:hover, #NivSelect:hover {
+    background: var(--textSecondary);
+    color: var(--bgColor);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--textSecondary);
+}
+
+
+#tempSelect:focus, #NivSelect:focus {
+    outline: none;
+    background: var(--secondaryColor);
+    color: var(--bgColor);
+    box-shadow: 0 0 10px var(--secondaryColor);
+}
+
+
+label {
+    color: var(--textPrimary);
+    font-size: 1.2rem;
+    margin-right: 10px;
+    display: inline-block;
+}
 
 div#game {
     line-height: 35px;
@@ -181,6 +218,7 @@ body.shake {
 #game.over #focus-error {
     display: none;
 }
+
 
 footer {
     position: fixed;
