@@ -1,3 +1,5 @@
+
+
 class Mot {
   constructor(link) {
       this.link = link;// une fois que le github sera en publique et bien organisé, on mettra id a la place de link
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateTempInfo(); // Met à jour l'affichage après changement
   });
 });
+
 window.timer = null;
 window.gameStart = null;
 window.pauseTime = 0;
@@ -100,13 +103,14 @@ function motsParMinute() {
     const correctlettres = lettres.filter(lettre => lettre.className.includes('correct'));
     return lettresIncorrectes.length === 0 && correctlettres.length === lettres.length;
   });
-  return correctmots.length / tempSelect.value * 60;
+  return correctmots.length / parseInt(tempSelect.value, 10) * 60;
 }
 
 function gameOver() {
   clearInterval(window.timer);
   ajoutClasse(document.getElementById('game'), 'over');
   const result = motsParMinute();
+  localStorage.setItem("resultat", result);
   document.getElementById('info').innerHTML = `WPM: ${result}`;
   window.location.href = 'pagefin.html';
 }
