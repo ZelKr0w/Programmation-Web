@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+
 window.timer = null;
 window.gameStart = null;
 window.pauseTime = 0;
