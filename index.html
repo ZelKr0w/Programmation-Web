@@ -31,15 +31,15 @@
                 </div>
             </section>
             <aside>
-                Historique:
-                <table id="historyTable"></table>
+                <table id="historyTable" style="width: 100%;"></table>
                 <script>
                     const table = document.getElementById('historyTable');
                     let history = JSON.parse(localStorage.getItem('history')) || [];
-                    table.innerHTML = '<tr><th>#</th><th>Score</th></tr>';
+                    table.innerHTML = '<tr><th colspan=2>Historique:</th></tr>';
                     history.forEach((score, index) => {
-                        table.innerHTML += `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
+                        table.innerHTML += `<tr><td style="font-style: italic; font-size: 15px;">${index + 1})</td><td>${score}</td></tr>`;
                     });
+                    table.innerHTML += '<tr><td colspan=2><span style="position: absolute; bottom: 0;" onclick="localStorage.removeItem(\'history\'); location.reload();">🗑️</span></th></tr>'
                 </script>
             </aside>
         </main>

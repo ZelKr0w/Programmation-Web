@@ -40,13 +40,13 @@ header br {
 }
 
 main {
-    
     width: 600px;
     margin: 50px auto;
     text-align: center;
     flex: 1;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 main > section {
@@ -55,10 +55,17 @@ main > section {
 }
 
 aside {
-    flex: 1;
-    padding: 20px;
+    position: absolute;
+    top: 0;
+    right: -300px;
+    width: 150px;
+    height: 135%;
+    padding: 10px;
     overflow-y: auto;
-    max-height: 100vh;
+    max-height: calc(100vh - 50px);
+    text-align: center;
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 h1.title {
