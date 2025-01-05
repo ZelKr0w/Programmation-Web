@@ -20,7 +20,7 @@
             if (resultat > highscore) {
                 highscore = resultat;
                 localStorage.setItem('highscore', highscore);
-                document.getElementById('resultat').innerHTML = `Vous avez atteint un nouveaux highscore de ${resultat} mots par minute !`;
+                document.getElementById('resultat').innerHTML = `Vous avez atteint un nouveau highscore de ${resultat} mots par minute !`;
             }
             else {
                 document.getElementById('resultat').innerHTML = `Votre score est de ${resultat} mots par minute. Le highscore est ${highscore}.`;
