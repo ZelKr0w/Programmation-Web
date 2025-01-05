@@ -1,31 +1,63 @@
 
+// Fonction de sélection du niveau
+function choixNiveau() {
+  const niveau = document.getElementById("NivSelect").value;
+  const niveaux = {
+      "lv1": "id1",
+      "lv2": "id2",
+      "lv3": "id3"
+  };
+  return niveaux[niveau] || "id1"; // Par défaut, retourne `id1` si le niveau est introuvable
+}
 
+// Classe Mot pour la gestion des mots
 class Mot {
-  constructor(link) {
-      this.link = link;// une fois que le github sera en publique et bien organisé, on mettra id a la place de link
-                      // pour avoir un truc du type "http://raw.ghitub.zelkr0w/projet-web/mot/ + id+ ".txt"
+  constructor() {
+      this.lien = this.recupLien();
       this.tabMots = [];
-      this.tailleTab = 0;  // Initialisation de tailleTab
+      this.tailleTab = 0;
+  }
+
+  recupLien() {
+      return "https://raw.githubusercontent.com/ZelKr0w/Programmation-Web/refs/heads/master/Annexes/mots/" + choixNiveau();
+  }
+
+  updatelien() {
+      this.lien = this.recupLien();
   }
 
   async loadTextArray() {
       try {
-          const response = await fetch(this.link);
-          if (!response.ok) throw new Error(`Erreur lors du chargement du fichier : ${response.statusText}`);
+          const response = await fetch(this.lien);
+          if (!response.ok) {
+              throw new Error(`Erreur lors du chargement du fichier : ${response.statusText}`);
+          }
           const text = await response.text();
-          this.tabMots = text.split(/\s+/);  // Divise le texte en un tableau de mots
-          this.tailleTab = this.tabMots.length;  
+          this.tabMots = text.split(/\s+/); // Divise le contenu en un tableau de mots
+          this.tailleTab = this.tabMots.length; // Met à jour la taille du tableau
       } catch (error) {
           console.error("Erreur :", error);
-          this.tabMots = [];  // En cas d'erreur, réinitialise le tableau
-          this.tailleTab = 0;  // Si une erreur se produit, la taille est 0
+          this.tabMots = []; // Vide le tableau en cas d'erreur
+          this.tailleTab = 0;
       }
   }
 }
 
-//ici il faudrait ajouter une boucle if pour decider du lien(id) en fonction de la difficulté choisi par l'utilisateur 
-const sourcemot= new Mot("https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words.txt")
-let tempPartie = 30000; // Default value (30 seconds)
+// Instance de la classe Mot
+const sourcemot = new Mot();
+
+// Gestion de l'événement de changement de niveau
+document.getElementById("NivSelect").addEventListener("change", async () => {
+    sourcemot.updatelien(); // Met à jour le lien de l'instance
+    await sourcemot.loadTextArray(); // Recharge les mots avec le nouveau lien
+    console.log("Mots chargés pour le nouveau niveau :", sourcemot.tabMots);
+
+    // Redémarrer le jeu après changement de niveau
+    await newGame();
+});
+
+// Gestion du timer et du temps de jeu
+let tempPartie = 30000; // Valeur par défaut (30 secondes)
 
 function updateTempInfo() {
   document.getElementById('info').innerHTML = `${tempPartie / 1000} sec`;
@@ -45,27 +77,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-
-window.timer = null;
-window.gameStart = null;
-window.pauseTime = 0;
-function ajoutClasse(el,name) {
-  el.className += ' '+name;
-}
-function supprimeClasse(el,name) {
-  el.className = el.className.replace(name,'');
+// Fonctions utilitaires pour la gestion des classes CSS
+function ajoutClasse(el, name) {
+  el.className += ' ' + name;
 }
 
+function supprimeClasse(el, name) {
+  el.className = el.className.replace(name, '');
+}
+
+// Fonction pour récupérer un mot au hasard
 function motHasard() {
   const randomIndex = Math.ceil(Math.random() * sourcemot.tailleTab);
   return sourcemot.tabMots[randomIndex - 1];
 }
 
+// Fonction pour insérer un mot dans le HTML
 function insertMot(mot) {
   return `<div class="mot"><span class="lettre">${mot.split('').join('</span><span class="lettre">')}</span></div>`;
 }
 
+// Fonction pour démarrer un nouveau jeu
 async function newGame() {
   await sourcemot.loadTextArray(); // Charger les mots
 
@@ -75,9 +107,11 @@ async function newGame() {
 
   // Ajouter les nouveaux mots
   for (let i = 0; i < 200; i++) {
-    motsContainer.innerHTML += insertMot(motHasard());
+      motsContainer.innerHTML += insertMot(motHasard());
   }
+
   updateTempInfo();
+
   // Activer le premier mot et la première lettre
   ajoutClasse(document.querySelector('.mot'), 'actuel');
   ajoutClasse(document.querySelector('.lettre'), 'actuel');
@@ -86,6 +120,7 @@ async function newGame() {
   document.getElementById('info').innerHTML = (tempPartie / 1000).toString();
 }
 
+// Fonction pour jouer un son à chaque frappe de touche
 function playKeySound() {
   const audio = new Audio('keypress.mp3'); // Chemin vers votre fichier audio
   audio.volume = 0.5; // Ajustez le volume si nécessaire
@@ -94,6 +129,7 @@ function playKeySound() {
   });
 }
 
+// Fonction pour calculer les mots par minute
 function motsParMinute() {
   const mots = [...document.querySelectorAll('.mot')];
   const dernierMotEcrit = document.querySelector('.mot.actuel');
@@ -108,6 +144,7 @@ function motsParMinute() {
   return correctmots.length / parseInt(tempSelect.value, 10) * 60;
 }
 
+// Fonction de fin de jeu
 function gameOver() {
   clearInterval(window.timer);
   ajoutClasse(document.getElementById('game'), 'over');
@@ -117,6 +154,7 @@ function gameOver() {
   window.location.href = 'pagefin.html';
 }
 
+// Gestion des événements de touche
 document.getElementById('game').addEventListener('keyup', ev => {
   const key = ev.key;
   const motActuel = document.querySelector('.mot.actuel');
@@ -153,22 +191,21 @@ document.getElementById('game').addEventListener('keyup', ev => {
   if(onALettre){
     playKeySound();
     if(lettreActuelle){
-         if(key===toucheAttendue){
-            ajoutClasse(lettreActuelle, "correct") 
-            supprimeClasse(lettreActuelle,"actuel")
-           if(lettreActuelle.nextSibling){// on check si on a bien une lettre apres la lettre actuelle
-                ajoutClasse(lettreActuelle.nextSibling, "actuel")
+         if(key === toucheAttendue){
+            ajoutClasse(lettreActuelle, "correct"); 
+            supprimeClasse(lettreActuelle,"actuel");
+            if(lettreActuelle.nextSibling) { // Check if next letter exists
+                ajoutClasse(lettreActuelle.nextSibling, "actuel");
             }
          }
          else{
-            ajoutClasse(lettreActuelle, "incorrect")
-            supprimeClasse(lettreActuelle,"actuel")
+            ajoutClasse(lettreActuelle, "incorrect");
+            supprimeClasse(lettreActuelle,"actuel");
             if(lettreActuelle.nextSibling){
-                ajoutClasse(lettreActuelle.nextSibling, "actuel")
+                ajoutClasse(lettreActuelle.nextSibling, "actuel");
             }
         }
       }
-
   }
 
   if (onAEspace) {
@@ -188,11 +225,10 @@ document.getElementById('game').addEventListener('keyup', ev => {
   }
 
   if (onAEfface) {
-    
     playKeySound();
   
     if (lettreActuelle && premiereLettre) {
-      // make prev mot actuel, last lettre actuel
+      // Make previous word current and last letter current
       supprimeClasse(motActuel, 'actuel');
       ajoutClasse(motActuel.previousSibling, 'actuel');
       supprimeClasse(lettreActuelle, 'actuel');
@@ -201,7 +237,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
       supprimeClasse(motActuel.previousSibling.lastChild, 'correct');
     }
     if (lettreActuelle && !premiereLettre) {
-      // move back one lettre, invalidate lettre
+      // Move back one letter and invalidate the letter
       supprimeClasse(lettreActuelle, 'actuel');
       ajoutClasse(lettreActuelle.previousSibling, 'actuel');
       supprimeClasse(lettreActuelle.previousSibling, 'incorrect');
@@ -214,14 +250,14 @@ document.getElementById('game').addEventListener('keyup', ev => {
     }
   }
 
-  // move lines / mots
-  if (motActuel.getBoundingClientRect().top > 300) {
+  //bouger les lignes
+  if (motActuel.getBoundingClientRect().top > 250) {
     const mots = document.getElementById('mots');
     const margin = parseInt(mots.style.marginTop || '0px');
     mots.style.marginTop = (margin - 35) + 'px';
   }
 
-  // move cursor
+  // Bouger le cursuer
   const nextlettre = document.querySelector('.lettre.actuel');
   const nextmot = document.querySelector('.mot.actuel');
   const cursor = document.getElementById('cursor');
@@ -229,6 +265,7 @@ document.getElementById('game').addEventListener('keyup', ev => {
   cursor.style.left = (nextlettre || nextmot).getBoundingClientRect()[nextlettre ? 'left' : 'right'] + 'px';
 });
 
+// Gestion du bouton pour démarrer un nouveau jeu
 document.getElementById('newGameBtn').addEventListener('click', async () => {
   clearInterval(window.timer); // Stop any ongoing timer
   window.timer = null;
@@ -251,4 +288,24 @@ document.getElementById('newGameBtn').addEventListener('click', async () => {
   await newGame();
 });
 
+//pour flouter le choix du temps et du niveau quand on commence à écrire
+document.addEventListener("DOMContentLoaded", function() {
+  
+
+  const gameElement = document.getElementById('game');
+  const tempSelect = document.querySelector('select#tempSelect').parentElement;
+  const nivSelect = document.querySelector('select#NivSelect').parentElement;
+  const headerElement = document.getElementById('header');
+
+  
+  gameElement.addEventListener('focus', () => {
+      tempSelect.style.display = 'none';
+      nivSelect.style.display = 'none';
+  });
+
+  
+  
+})
+// Démarrer un nouveau jeu au chargement de la page
 newGame();
+
