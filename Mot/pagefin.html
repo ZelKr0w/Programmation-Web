@@ -15,8 +15,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const resultat = localStorage.getItem('resultat');
-            document.getElementById('resultat').textContent = `Votre score est de ${resultat} mots par minute.`;
+            const resultat = localStorage.getItem('result');
+            document.getElementById('resultat').innerHTML = `Votre score est de ${resultat} mots par minute.`;
         });
     </script>
 </body>
