@@ -15,8 +15,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const resultat = localStorage.getItem('resultat');
-            document.getElementById('resultat').innerHTML = `Votre score est de ${resultat} mots par minute.`;
+            const resultat = parseInt(localStorage.getItem('resultat'), 10) || 0;
+            let highscore = parseInt(localStorage.getItem('highscore'), 10) || 0;
+            if (resultat > highscore) {
+                highscore = resultat;
+                localStorage.setItem('highscore', highscore);
+                document.getElementById('resultat').innerHTML = `Vous avez atteint un nouveaux highscore de ${resultat} mots par minute !`;
+            }
+            else {
+                document.getElementById('resultat').innerHTML = `Votre score est de ${resultat} mots par minute. Le highscore est ${highscore}.`;
+            }
         });
     </script>
     <footer>
