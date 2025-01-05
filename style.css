@@ -40,6 +40,7 @@ header br {
 }
 
 main {
+    
     width: 600px;
     margin: 50px auto;
     text-align: center;
@@ -49,6 +50,10 @@ h1.title {
     color: var(--primaryColor);
     text-shadow: 0 0 15px var(--primaryColor);
     margin-bottom: 40px;
+}
+
+ul {
+  list-style-type : none;
 }
 
 #desc {
@@ -75,6 +80,8 @@ button:hover {
 }
 
 footer {
+    position: fixed;
+    bottom:0 ;
     background-color: var(--secondaryColor);
     box-shadow: 0 0 15px var(--secondaryColor);
     color: var(--textPrimary);
