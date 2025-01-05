@@ -25,6 +25,9 @@
             else {
                 document.getElementById('resultat').innerHTML = `Votre score est de ${resultat} mots par minute. Le highscore est ${highscore}.`;
             }
+            let history = JSON.parse(localStorage.getItem('history')) || [];
+            history.push(resultat);
+            localStorage.setItem('history', JSON.stringify(history));
         });
     </script>
     <footer>

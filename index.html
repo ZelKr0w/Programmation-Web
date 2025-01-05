@@ -18,17 +18,32 @@
             </h1>
         </header>
         <main>
-            <div class="main-container">
-                <h1 class="title">Bienvenue sur INSAType</h1>
-            </div>
-            <div id="desc">
-                <ul class="list">
-                    <li id="desc1">
-                        <button id="Perso" onclick="window.location.href='./Mot/mot.html';">C'est Parti !</button>
-                    </li>
-                </ul>
-            </div>
+            <section>
+                <div class="main-container">
+                    <h1 class="title">Bienvenue sur INSAType</h1>
+                </div>
+                <div id="desc">
+                    <ul class="list">
+                        <li id="desc1">
+                            <button id="Perso" onclick="window.location.href='./Mot/mot.html';">C'est Parti !</button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <aside>
+                Histoire:
+                <table id="historyTable"></table>
+                <script>
+                    const table = document.getElementById('historyTable');
+                    let history = JSON.parse(localStorage.getItem('history')) || [];
+                    table.innerHTML = '<tr><th>#</th><th>Score</th></tr>';
+                    history.forEach((score, index) => {
+                        table.innerHTML += `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
+                    });
+                </script>
+            </aside>
         </main>
+        
         <footer>
             <p>Fait par</p>
             <ul class="nav-link">
