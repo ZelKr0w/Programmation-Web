@@ -196,8 +196,9 @@ body.shake {
     height: 1.6rem;
     background: var(--primaryColor);
     position: fixed;
-    top: 198px;
-    left: 18px;
+    top: 213px;
+    
+    left: 390px;
     animation: blink 0.3s infinite;
     box-shadow: 0 0 10px var(--primaryColor);
 }
