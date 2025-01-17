@@ -1,4 +1,10 @@
+function afficherOptions() {
+  const tempSelect = document.querySelector('select#tempSelect').parentElement;
+  const nivSelect = document.querySelector('select#NivSelect').parentElement;
 
+  tempSelect.style.display = 'block';
+  nivSelect.style.display = 'block';
+}
 // Fonction de sélection du niveau
 function choixNiveau() {
   const niveau = document.getElementById("NivSelect").value;
@@ -99,6 +105,7 @@ function insertMot(mot) {
 
 // Fonction pour démarrer un nouveau jeu
 async function newGame() {
+  
   await sourcemot.loadTextArray(); // Charger les mots
 
   // Réinitialiser le contenu de la zone de jeu
@@ -108,9 +115,11 @@ async function newGame() {
   // Ajouter les nouveaux mots
   for (let i = 0; i < 200; i++) {
       motsContainer.innerHTML += insertMot(motHasard());
+  
   }
-
+  afficherOptions();
   updateTempInfo();
+
 
   // Activer le premier mot et la première lettre
   ajoutClasse(document.querySelector('.mot'), 'actuel');
@@ -119,7 +128,6 @@ async function newGame() {
   // Réinitialiser le timer d'information
   document.getElementById('info').innerHTML = (tempPartie / 1000).toString();
 }
-
 // Fonction pour jouer un son à chaque frappe de touche
 function playKeySound() {
   const audio = new Audio('keypress.mp3'); // Chemin vers votre fichier audio
