@@ -234,36 +234,35 @@ document.getElementById('game').addEventListener('keyup', ev => {
 
   if (onAEfface) {
     playKeySound();
-  
-    if (lettreActuelle && premiereLettre) {
-      // Make previous word current and last letter current
-      supprimeClasse(motActuel, 'actuel');
-      ajoutClasse(motActuel.previousSibling, 'actuel');
-      supprimeClasse(lettreActuelle, 'actuel');
-      ajoutClasse(motActuel.previousSibling.lastChild, 'actuel');
-      supprimeClasse(motActuel.previousSibling.lastChild, 'incorrect');
-      supprimeClasse(motActuel.previousSibling.lastChild, 'correct');
-    }
-    if (lettreActuelle && !premiereLettre) {
-      // Move back one letter and invalidate the letter
-      supprimeClasse(lettreActuelle, 'actuel');
-      ajoutClasse(lettreActuelle.previousSibling, 'actuel');
-      supprimeClasse(lettreActuelle.previousSibling, 'incorrect');
-      supprimeClasse(lettreActuelle.previousSibling, 'correct');
-    }
-    if (!lettreActuelle) {
-      ajoutClasse(motActuel.lastChild, 'actuel');
-      supprimeClasse(motActuel.lastChild, 'incorrect');
-      supprimeClasse(motActuel.lastChild, 'correct');
-    }
-  }
 
-  //bouger les lignes
-  if (motActuel.getBoundingClientRect().top > 250) {
-    const mots = document.getElementById('mots');
-    const margin = parseInt(mots.style.marginTop || '0px');
-    mots.style.marginTop = (margin - 35) + 'px';
-  }
+    if (lettreActuelle && premiereLettre) {
+        // Vérifie s'il existe un mot précédent
+        if (motActuel.previousSibling) {
+            // Rend le mot précédent actuel et active la dernière lettre
+            supprimeClasse(motActuel, 'actuel');
+            ajoutClasse(motActuel.previousSibling, 'actuel');
+            supprimeClasse(lettreActuelle, 'actuel');
+            ajoutClasse(motActuel.previousSibling.lastChild, 'actuel');
+            supprimeClasse(motActuel.previousSibling.lastChild, 'incorrect');
+            supprimeClasse(motActuel.previousSibling.lastChild, 'correct');
+        }
+    }
+
+    if (lettreActuelle && !premiereLettre) {
+        // Déplace la sélection vers la lettre précédente
+        supprimeClasse(lettreActuelle, 'actuel');
+        ajoutClasse(lettreActuelle.previousSibling, 'actuel');
+        supprimeClasse(lettreActuelle.previousSibling, 'incorrect');
+        supprimeClasse(lettreActuelle.previousSibling, 'correct');
+    }
+
+    if (!lettreActuelle) {
+        // Si aucune lettre actuelle, active la dernière lettre du mot actuel
+        ajoutClasse(motActuel.lastChild, 'actuel');
+        supprimeClasse(motActuel.lastChild, 'incorrect');
+        supprimeClasse(motActuel.lastChild, 'correct');
+    }
+}
 
   // Bouger le cursuer
   const nextlettre = document.querySelector('.lettre.actuel');
